@@ -1,0 +1,10 @@
+pandas
+seaborn
+scikit-learn
+xgboost
+matplotlib
+joblib
+numpy==1.26.4
+streamlit>=1.35.0
+Pillow
+requests
