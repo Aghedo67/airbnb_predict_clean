@@ -41,7 +41,7 @@ def load_data():
 
 @st.cache_resource
 def load_suggestion_model():
-    return joblib.load('recommendation_system/baseline_model.pkl')
+    return joblib.load('Recommendation_system/baseline_model.pkl')
 
 def get_image(url):
     try:
