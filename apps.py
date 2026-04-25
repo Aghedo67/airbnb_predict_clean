@@ -169,33 +169,6 @@ with tab3:
     st.markdown("---")
 
     # --- 3. Statistical Validation ---
-st.subheader("Statistical Validation")
-
-# Create columns (aligned with the subheader)
-eth_col1, eth_col2 = st.columns(2)
-
-with eth_col1:
-    st.markdown("""
-    **Physical Location**
-    Very strong accommodates, bedrooms, beds drive the most variance — confirmed by both ANOVA F > 6,000 and heatmap collinearity.
-    """)
-    
-    # Moving Review Scores here to balance the columns
-    st.markdown("""
-    **Review Scores**
-    Collinear: Statistically significant but highly intercorrelated r = 0.57–0.91.
-    """)
-
-with eth_col2:
-    st.markdown("""
-    **Location**
-    Strong: review_scores_location is independently significant F = 7,850 and least collinear among all review features.
-    """)
-
-    st.markdown("""
-    **Bathrooms**
-    Remove: Not significant p = 0.476 — redundant once size variables are included in the model.
-    """)
    
     #with st.expander("🔍 Note on Proxy Bias"):
        # st.write("""
