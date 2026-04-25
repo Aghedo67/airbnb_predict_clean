@@ -168,22 +168,35 @@ with tab3:
 
     st.markdown("---")
 
-    # --- 3. Ethical Considerations ---
-   # st.subheader("⚖️ Ethical & Social Considerations")
+    # --- 3. Statistical Validation ---
+
+st.subheader("Statistical Validation")
     
-   # eth_col1, eth_col2 = st.columns(2)
+    eth_col1, eth_col2 = st.columns(2)
     
-    #with eth_col1:
-        #st.markdown("""
-        #**Gentrification Risk**
-        #By suggesting prices based on 'Neighborhood Frequency,' the tool may inadvertently encourage price inflation in developing areas, potentially impacting local housing affordability.
-        #""")
+    with eth_col1:
+        st.markdown("""
+        **Physical Location**
+        Very strong accommodates, bedrooms, beds drive the most variance — confirmed by both ANOVA F > 6,000 and heatmap collinearity.
+        """)
     
-    #with eth_col2:
-        #st.markdown("""
-        #**The Professional Bias**
-        #The model rewards 'Superhost' status and high response rates. This naturally favors professional property managers over casual 'mom-and-pop' hosts who may lack 24/7 staffing.
-        #""")
+    with eth_col2:
+        st.markdown("""
+        **Location**
+        Strong review_scores_location is independently significant F = 7,850 and least collinear among all review features..
+        """)
+
+    with eth_col2:
+        st.markdown("""
+        **Review Scores**
+        Collinear Statistically significant but highly intercorrelated r = 0.57–0.91.
+        """)
+
+    with eth_col2:
+        st.markdown("""
+        **Bathrooms**
+        Remove Not significant p = 0.476 — redundant once size variables are included in the model.
+        """)
 
     #with st.expander("🔍 Note on Proxy Bias"):
        # st.write("""
