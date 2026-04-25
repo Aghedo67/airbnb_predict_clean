@@ -169,7 +169,6 @@ with tab3:
     st.markdown("---")
 
     # --- 3. Statistical Validation ---
-
 st.subheader("Statistical Validation")
     
     eth_col1, eth_col2 = st.columns(2)
