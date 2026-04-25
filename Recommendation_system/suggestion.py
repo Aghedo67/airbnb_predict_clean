@@ -131,6 +131,10 @@ def main():
             st.pyplot(fig)
         else:
             st.warning("Visualization libraries (Matplotlib/Seaborn) not yet loaded. Check requirements.txt.")
+            st.write(f"""
+            - There is a noticeable spike at neutral (0) and very few strongly negative scores, suggesting limited dissatisfaction and some reviews that are purely descriptive rather than emotional.
+            - Sentiment is overwhelmingly positive, with a strong concentration of scores between 0.8 and 1.0, indicating most Dublin reviews are highly favorable.
+            """)
 
     with tab3:
         st.header("Project Considerations")
