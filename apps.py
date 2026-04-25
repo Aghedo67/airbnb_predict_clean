@@ -167,6 +167,7 @@ with tab3:
         
         **The Log-Scale Effect**
         Because errors are calculated on a log scale, the model may struggle with extreme luxury or extreme budget listings.
+        Errors look small in log-space but can be large in € terms for high-priced listings. A €500/night listing with RMSE 0.39 could be off by €200+
         """)
 
     st.markdown("---")
