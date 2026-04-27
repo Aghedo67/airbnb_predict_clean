@@ -144,7 +144,6 @@ def main():
             st.subheader("⚠️ Technical Limitations")
             st.write(f"""
             - **Positivity Bias:** Highly skewed data (0.8+) makes distinguishing high-quality stays a challenge.
-            - **Rating proxy limitation:** Sentiment compound scores (−1 to 1) produced a bimodal distribution concentrated at 0 and 1, reducing the variance needed for personalised recommendations.
             - **Model generalisation:** BaselineOnly (RMSE: 0.434, MAE: 0.321) captures global/user-level biases only, not true user-item interactions.
             - **Cold Start:** The system requires existing review history to make accurate matches.
             """)
