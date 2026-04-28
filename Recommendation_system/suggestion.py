@@ -117,7 +117,7 @@ def main():
         col_m1, col_m2, col_m3 = st.columns(3)
         col_m1.metric("Training Samples", "276,126")
         col_m2.metric("RMSE", "0.4347")
-        col_m3.metric("MAE", "0.3205")
+        col_m3.metric("MAE", "0.3205", "Fit Time", "4.68 sec")
         
         st.markdown("---")
         
