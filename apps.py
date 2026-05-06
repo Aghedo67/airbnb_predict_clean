@@ -163,7 +163,7 @@ with tab3:
         The model cannot see 'intangibles' like interior design, professional photography, or proximity to specific landmarks.
         
         **Overfitting (mild but present)**
-        The train/test RMSE gap of ~0.11 suggests the model has memorised some training noise. With only 100 estimators and no regularisation tuning (lambda, alpha).
+        The train/test RMSE gap of ~0.11 suggests the model has memorised some training noise.
         
         **The Log-Scale Effect**
         Because errors are calculated on a log scale, the model may struggle with extreme luxury or extreme budget listings.
