@@ -127,6 +127,14 @@ with tab3:
     with col_m3:
         st.metric("Test MAE (Log)", "0.2665", help="Mean Absolute Error. Roughly 26-30% error in Euro terms.")
 
+    col_m1, col_m2, col_m3 = st.columns(3)
+    with col_m1:
+        st.metric("R² Score", "0.6925", help="Explains 69% of price variance. Higher is better.")
+    with col_m2:
+        st.metric("Test RMSE (Log)", "0.3910", help="Root Mean Squared Error on log-transformed prices.")
+    with col_m3:
+        st.metric("Test MAE (Log)", "0.2665", help="Mean Absolute Error. Roughly 26-30% error in Euro terms.")
+
     st.markdown("---")
 
     # --- 2. Feature Importance ---
