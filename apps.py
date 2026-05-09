@@ -66,7 +66,14 @@ col2.metric("⭐ Overall Rating", round(df['review_scores_rating'].mean(), 2))
 col3.metric("🏘️ Listings", len(df))
 
 # -------------------- TABS --------------------
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["📊 Dashboard", "📈 Visual Insights", " 📊 ANOVA Analysis Insights" "🧠 Model Insights", "🤖 Prediction"])
+
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
+    "📊 Dashboard",
+    "📈 Visual Insights",
+    "📊 ANOVA Analysis Insights",
+    "🧠 Model Insights",
+    "🤖 Prediction"
+])
 
 # -------------------- TAB 1 --------------------
 with tab1:
