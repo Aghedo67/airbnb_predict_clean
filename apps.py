@@ -197,6 +197,8 @@ with tab3:
 
 # -------------------- TAB 4 --------------------
 with tab4:
+    import plotly.express as px
+
     st.markdown("## 📊 ANOVA Analysis Insights")
 
     # --- HIGHLIGHT CARDS ---
@@ -232,31 +234,36 @@ with tab4:
 
     df_anova = pd.DataFrame(data)
 
-    # --- SIGNIFICANCE COLUMN ---
-    df_anova["Significant"] = df_anova["p_value"].apply(
-        lambda x: "✔ Significant" if x < 0.05 else "✖ Not Significant"
+    # --- SIGNIFICANCE FLAG ---
+    df_anova["Significance"] = df_anova["p_value"].apply(
+        lambda x: "Significant (p < 0.05)" if x < 0.05 else "Not Significant"
     )
 
-    # --- DISPLAY TABLE ---
-    st.markdown("### 📋 ANOVA Results Table")
-    st.dataframe(df_anova, use_container_width=True)
+    # --- INTERACTIVE PLOTLY BAR CHART ---
+    st.markdown("### 📈 Interactive Feature Importance")
 
-    # --- BAR CHART (F-values) ---
-    st.markdown("### 📈 Feature Importance (F-values)")
+    fig = px.bar(
+        df_anova,
+        x="F_value",
+        y="Feature",
+        color="Significance",
+        orientation="h",
+        hover_data={
+            "F_value": True,
+            "p_value": ':.2e',   # scientific format
+            "Feature": False
+        },
+        title="ANOVA Feature Significance (Interactive)"
+    )
 
-    fig, ax = plt.subplots()
-    ax.barh(df_anova["Feature"], df_anova["F_value"])
-    ax.invert_yaxis()
-    ax.set_xlabel("F-value (Importance)")
-    ax.set_title("ANOVA Feature Significance")
+    fig.update_layout(yaxis=dict(autorange="reversed"))
 
-    st.pyplot(fig)
+    st.plotly_chart(fig, use_container_width=True)
 
     # --- INTERPRETATION ---
     st.info(
-        "📌 Features with p-values < 0.05 are statistically significant. "
-        "Accommodates, bedrooms, and location-related factors dominate pricing, "
-        "while bathrooms show no significant effect."
+        "📌 Hover over each bar to see exact F-values and p-values. "
+        "Features with p < 0.05 are statistically significant drivers of price."
     )
 # -------------------- TAB 5 --------------------
 with tab5:
