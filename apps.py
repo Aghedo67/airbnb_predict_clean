@@ -309,7 +309,7 @@ with tab5:
             'review_scores_rating': rating,
             'review_scores_cleanliness': cleanliness,
             'review_scores_location': location,
-            'number_of_reviews': reviews,
+            #'number_of_reviews': reviews,
             'neighbourhood_freq': n_freq,
             'property_type_freq': p_freq
         }])
