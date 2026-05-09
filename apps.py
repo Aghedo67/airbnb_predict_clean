@@ -290,7 +290,7 @@ with tab5:
         cleanliness = st.slider("Cleanliness", 0.0, 5.0, 4.5)
     with col4:
         location = st.slider("Location Score", 0.0, 5.0, 4.5)
-        reviews = st.number_input("Number of Reviews", 0, 500000, 10)
+        #reviews = st.number_input("Number of Reviews", 0, 500000, 10)
 
     max_nights = st.slider("Max Nights", 1, 1125, 30)
 
