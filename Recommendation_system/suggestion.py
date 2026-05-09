@@ -132,8 +132,9 @@ def main():
             st.pyplot(fig)
             st.subheader("📊 Key Findings")
             st.write(f"""
-            - There is a noticeable spike at neutral (0) and very few strongly negative scores, suggesting limited dissatisfaction and some reviews that are purely descriptive rather than emotional.
-            - Sentiment is overwhelmingly positive, with a strong concentration of scores between 0.8 and 1.0, indicating most Dublin reviews are highly favorable.
+            - Highly Positive: Sentiment is overwhelmingly favourable, with most scores between 0.8 and 1.0.
+            - Low Dissatisfaction: There are very few strongly negative reviews.
+            - Neutral Spike: A cluster of neutral scores (0) suggests some reviews are purely descriptive and lack emotional bias.
             """)
         else:
             st.warning("Visualization libraries (Matplotlib/Seaborn) not yet loaded. Check requirements.txt.")
