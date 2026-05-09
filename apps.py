@@ -199,49 +199,43 @@ with tab3:
 with tab4:
     st.markdown("## 📊 ANOVA Analysis Insights")
 
-# --- HIGHLIGHT CARDS ---
-col1, col2, col3 = st.columns(3)
+    # --- HIGHLIGHT CARDS ---
+    col1, col2, col3 = st.columns(3)
 
-with col1:
-    st.success("🏆 **Top Drivers**\n\n- Accommodates\n- Bedrooms\n- Property Type\n- Location Scores")
+    with col1:
+        st.success("🏆 **Top Drivers**\n\n- Accommodates\n- Bedrooms\n- Property Type\n- Location Scores")
 
-with col2:
-    st.warning("⚖️ **Moderate Impact**\n\n- Room Type\n- Instant Booking\n- Season\n- Cleanliness")
+    with col2:
+        st.warning("⚖️ **Moderate Impact**\n\n- Room Type\n- Instant Booking\n- Season\n- Cleanliness")
 
-with col3:
-    st.error("⚠️ **Low / Insignificant**\n\n- Bathrooms\n- Number of Reviews")
+    with col3:
+        st.error("⚠️ **Low / Insignificant**\n\n- Bathrooms\n- Number of Reviews")
 
-# --- DATA FOR VISUALIZATION (F-values of key features) ---
-data = {
-    "Feature": [
-        "Accommodates", "Bedrooms", "Property Type",
-        "Location Score", "Room Type", "Instant Bookable",
-        "Season", "Bathrooms"
-    ],
-    "F_value": [
-        48323, 6501, 1261,
-        7849, 209, 562,
-        14, 0.5
-    ]
-}
+    # --- DATA FOR VISUALIZATION (F-values of key features) ---
+    data = {
+        "Feature": [
+            "Accommodates", "Bedrooms", "Property Type",
+            "Location Score", "Room Type", "Instant Bookable",
+            "Season", "Bathrooms"
+        ],
+        "F_value": [
+            48323, 6501, 1261,
+            7849, 209, 562,
+            14, 0.5
+        ]
+    }
 
-df = pd.DataFrame(data)
+    df_anova = pd.DataFrame(data)  # renamed to avoid overwriting your main df
 
-# --- BAR CHART ---
-st.markdown("### 📈 Feature Importance (ANOVA F-values)")
+    # --- BAR CHART ---
+    st.markdown("### 📈 Feature Importance (ANOVA F-values)")
 
-fig, ax = plt.subplots()
-ax.barh(df["Feature"], df["F_value"])
-ax.set_xlabel("F-value (Importance)")
-ax.set_title("ANOVA Feature Significance")
+    fig, ax = plt.subplots()
+    ax.barh(df_anova["Feature"], df_anova["F_value"])
+    ax.set_xlabel("F-value (Importance)")
+    ax.set_title("ANOVA Feature Significance")
 
-st.pyplot(fig)
-
-# --- INTERPRETATION BOX ---
-st.info(
-    "📌 **Interpretation:** Property size, type, and location-related ratings are the most influential factors in pricing. "
-    "Booking flexibility and room characteristics have moderate influence, while bathrooms and review counts contribute very little."
-)
+    st.pyplot(fig)
 # -------------------- TAB 5 --------------------
 with tab5:
     st.subheader("Enter Property Details")
