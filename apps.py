@@ -70,8 +70,8 @@ col3.metric("🏘️ Listings", len(df))
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "📊 Dashboard",
     "📈 Visual Insights",
-    "📊 ANOVA Analysis Insights",
     "🧠 Model Insights",
+    "📊 ANOVA Analysis Insights",
     "🤖 Prediction"
 ])
 
