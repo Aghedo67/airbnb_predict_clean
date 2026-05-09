@@ -66,7 +66,7 @@ col2.metric("⭐ Overall Rating", round(df['review_scores_rating'].mean(), 2))
 col3.metric("🏘️ Listings", len(df))
 
 # -------------------- TABS --------------------
-tab1, tab2, tab3, tab4 = st.tabs(["📊 Dashboard", "📈 Visual Insights", "🧠 Model Insights", "🤖 Prediction"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["📊 Dashboard", "📈 Visual Insights", " 📊 ANOVA Analysis Insights" "🧠 Model Insights", "🤖 Prediction"])
 
 # -------------------- TAB 1 --------------------
 with tab1:
@@ -188,6 +188,52 @@ with tab3:
         #automating existing prejudices into the pricing structure.
         #""")
 
+# -------------------- TAB 4 --------------------
+st.markdown("## 📊 ANOVA Analysis Insights")
+
+# --- HIGHLIGHT CARDS ---
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.success("🏆 **Top Drivers**\n\n- Accommodates\n- Bedrooms\n- Property Type\n- Location Scores")
+
+with col2:
+    st.warning("⚖️ **Moderate Impact**\n\n- Room Type\n- Instant Booking\n- Season\n- Cleanliness")
+
+with col3:
+    st.error("⚠️ **Low / Insignificant**\n\n- Bathrooms\n- Number of Reviews")
+
+# --- DATA FOR VISUALIZATION (F-values of key features) ---
+data = {
+    "Feature": [
+        "Accommodates", "Bedrooms", "Property Type",
+        "Location Score", "Room Type", "Instant Bookable",
+        "Season", "Bathrooms"
+    ],
+    "F_value": [
+        48323, 6501, 1261,
+        7849, 209, 562,
+        14, 0.5
+    ]
+}
+
+df = pd.DataFrame(data)
+
+# --- BAR CHART ---
+st.markdown("### 📈 Feature Importance (ANOVA F-values)")
+
+fig, ax = plt.subplots()
+ax.barh(df["Feature"], df["F_value"])
+ax.set_xlabel("F-value (Importance)")
+ax.set_title("ANOVA Feature Significance")
+
+st.pyplot(fig)
+
+# --- INTERPRETATION BOX ---
+st.info(
+    "📌 **Interpretation:** Property size, type, and location-related ratings are the most influential factors in pricing. "
+    "Booking flexibility and room characteristics have moderate influence, while bathrooms and review counts contribute very little."
+)
 # -------------------- TAB 4 --------------------
 with tab4:
     st.subheader("Enter Property Details")
