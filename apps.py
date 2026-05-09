@@ -211,7 +211,7 @@ with tab4:
     with col3:
         st.error("⚠️ **Low / Insignificant**\n\n- Bathrooms\n- Number of Reviews")
 
-    # --- DATA FOR VISUALIZATION (F-values of key features) ---
+    # --- DATA WITH F-VALUES + P-VALUES ---
     data = {
         "Feature": [
             "Accommodates", "Bedrooms", "Property Type",
@@ -222,20 +222,42 @@ with tab4:
             48323, 6501, 1261,
             7849, 209, 562,
             14, 0.5
+        ],
+        "p_value": [
+            0.0000, 0.0000, 0.0000,
+            0.0000, 6.08e-136, 2.56e-124,
+            3.23e-09, 0.476
         ]
     }
 
-    df_anova = pd.DataFrame(data)  # renamed to avoid overwriting your main df
+    df_anova = pd.DataFrame(data)
 
-    # --- BAR CHART ---
-    st.markdown("### 📈 Feature Importance (ANOVA F-values)")
+    # --- SIGNIFICANCE COLUMN ---
+    df_anova["Significant"] = df_anova["p_value"].apply(
+        lambda x: "✔ Significant" if x < 0.05 else "✖ Not Significant"
+    )
+
+    # --- DISPLAY TABLE ---
+    st.markdown("### 📋 ANOVA Results Table")
+    st.dataframe(df_anova, use_container_width=True)
+
+    # --- BAR CHART (F-values) ---
+    st.markdown("### 📈 Feature Importance (F-values)")
 
     fig, ax = plt.subplots()
     ax.barh(df_anova["Feature"], df_anova["F_value"])
+    ax.invert_yaxis()
     ax.set_xlabel("F-value (Importance)")
     ax.set_title("ANOVA Feature Significance")
 
     st.pyplot(fig)
+
+    # --- INTERPRETATION ---
+    st.info(
+        "📌 Features with p-values < 0.05 are statistically significant. "
+        "Accommodates, bedrooms, and location-related factors dominate pricing, "
+        "while bathrooms show no significant effect."
+    )
 # -------------------- TAB 5 --------------------
 with tab5:
     st.subheader("Enter Property Details")
