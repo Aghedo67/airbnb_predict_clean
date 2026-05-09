@@ -133,7 +133,7 @@ with tab3:
     with col_m2:
         st.metric("CV RMSE (Log)", "0.3784", help="Root Mean Squared Error on log-transformed prices.")
     with col_m3:
-        st.metric("CV MAE (Log)", "0.2721", help="Mean Absolute Error. Roughly 26-30% error in Euro terms.")
+        st.metric("CV MAE (Log)", "0.2721", help="Mean Absolute Error. Roughly 27-30% error in Euro terms.")
 
     st.markdown("---")
 
