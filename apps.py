@@ -189,7 +189,8 @@ with tab3:
         #""")
 
 # -------------------- TAB 4 --------------------
-st.markdown("## 📊 ANOVA Analysis Insights")
+with tab4:
+    st.markdown("## 📊 ANOVA Analysis Insights")
 
 # --- HIGHLIGHT CARDS ---
 col1, col2, col3 = st.columns(3)
@@ -234,8 +235,8 @@ st.info(
     "📌 **Interpretation:** Property size, type, and location-related ratings are the most influential factors in pricing. "
     "Booking flexibility and room characteristics have moderate influence, while bathrooms and review counts contribute very little."
 )
-# -------------------- TAB 4 --------------------
-with tab4:
+# -------------------- TAB 5 --------------------
+with tab5:
     st.subheader("Enter Property Details")
 
     col1, col2 = st.columns(2)
