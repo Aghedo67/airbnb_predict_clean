@@ -149,21 +149,32 @@ def get_image_safe(url):
     except Exception:
         return None
 
-def show_recommendations(user_id, listings_df, model):
+def show_recommendations(user_id, listings_df):
     try:
-        all_ids = listings_df['id_x'].unique()
+        # Find listings this user has reviewed
         seen_ids = listings_df[listings_df['reviewer_id'] == user_id]['id_x'].unique()
-        to_predict = list(set(all_ids) - set(seen_ids))
-        pairs = [(user_id, lid, 0) for lid in to_predict]
-        preds = model.test(pairs)
-        top5 = sorted(preds, key=lambda x: x.est, reverse=True)[:5]
+
+        if len(seen_ids) == 0:
+            st.warning("No review history found for this user ID.")
+            return
+
+        # Find the neighbourhoods and property types they liked
+        user_history = listings_df[listings_df['id_x'].isin(seen_ids)]
+        fav_neighbourhoods = user_history['neighbourhood'].value_counts().head(3).index.tolist()
+        fav_property_types = user_history['property_type'].value_counts().head(2).index.tolist()
+
+        # Score unseen listings by similarity
+        unseen = listings_df[~listings_df['id_x'].isin(seen_ids)].drop_duplicates('id_x').copy()
+        unseen['score'] = (
+            unseen['neighbourhood'].isin(fav_neighbourhoods).astype(int) * 2 +
+            unseen['property_type'].isin(fav_property_types).astype(int) +
+            unseen['review_scores_rating'].fillna(0) / 5
+        )
+
+        top5 = unseen.sort_values('score', ascending=False).head(5)
 
         st.markdown(f"#### Top picks for guest `{user_id}`")
-        for i, rec in enumerate(top5, 1):
-            row = listings_df[listings_df['id_x'] == rec.iid]
-            if row.empty:
-                continue
-            listing = row.iloc[0]
+        for _, listing in top5.iterrows():
             with st.container():
                 c1, c2 = st.columns([1, 2])
                 with c1:
@@ -179,12 +190,12 @@ def show_recommendations(user_id, listings_df, model):
                         )
                 with c2:
                     m1, m2, m3 = st.columns(3)
-                    m1.metric("Nightly Rate", f"€{listing.get('price','–')}")
+                    m1.metric("Nightly Rate", f"€{listing.get('price', '–')}")
                     m2.metric("Guests", f"{int(listing.get('accommodates', 0))}")
                     m3.metric("Bedrooms", f"{int(listing.get('bedrooms', 0))}")
                     with st.expander("Property details"):
                         st.write(listing.get('description', 'No description available.'))
-                        st.markdown(f"**Neighbourhood:** {listing.get('neighbourhood','–')}")
+                        st.markdown(f"**Neighbourhood:** {listing.get('neighbourhood', '–')}")
                     listing_url = listing.get('listing_url', '')
                     if listing_url:
                         st.link_button("View on Airbnb →", listing_url)
