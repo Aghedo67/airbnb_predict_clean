@@ -60,7 +60,7 @@ def load_raw():
 def load_price_model():
     return joblib.load(os.path.join(BASE_DIR, 'xgb_log_model (1).pkl'))
 
-df = load_aggregated():
+df = load_aggregated()
 st.write(df.columns.tolist())
 st.stop()
 raw_df = load_raw()
