@@ -434,14 +434,10 @@ with tab5:
         step=1
     )
 
-    col_rec1, col_rec2, col_rec3 = st.columns(3)
-<<<<<<< HEAD
-    col_rec1.metric("Approach", "Content-based")
-=======
-    col_rec1.metric("Approach", "collaborative filtering")
->>>>>>> db68e62a2b79d6d42d7d938e5efadfeb8f608cad
-    col_rec2.metric("Signals used", "3")
-    col_rec3.metric("Recommendations", "5")
+col_rec1, col_rec2, col_rec3 = st.columns(3)
+col_rec1.metric("Approach", "Collaborative Filtering")
+col_rec2.metric("Signals used", "3")
+col_rec3.metric("Recommendations", "5")
 
     st.markdown("---")
 
