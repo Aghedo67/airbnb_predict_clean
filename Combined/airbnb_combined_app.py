@@ -90,18 +90,18 @@ def load_aggregated():
 
 @st.cache_data
 def load_raw():
-    df = pd.read_csv('rating_data.csv.gz', compression='gzip')
+    df = pd.read_csv('dublin_merged_df(1).csv.gz', compression='gzip')
     df['date'] = pd.to_datetime(df['date'], errors='coerce')
     df['month'] = df['date'].dt.month
     return df
 
 @st.cache_resource
 def load_price_model():
-    return joblib.load('xgb_model_log.pkl')
+    return joblib.load('xgb_log_model(1).pkl')
 
 @st.cache_resource
 def load_recommendation_model():
-    return joblib.load('Combined/baseline_model_joblib.pkl')
+    return joblib.load('Recommendation_system/baseline_model_joblib.pkl')
 
 df = load_aggregated()
 raw_df = load_raw()
