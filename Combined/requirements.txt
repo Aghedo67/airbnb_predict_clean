@@ -8,4 +8,3 @@ xgboost
 plotly
 requests
 Pillow
-scikit-surprise
