@@ -435,7 +435,7 @@ with tab5:
     )
 
     col_rec1, col_rec2, col_rec3 = st.columns(3)
-    col_rec1.metric("Approach", "Content-based")
+    col_rec1.metric("Approach", "collaborative filtering")
     col_rec2.metric("Signals used", "3")
     col_rec3.metric("Recommendations", "5")
 
