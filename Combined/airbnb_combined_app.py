@@ -62,6 +62,9 @@ def load_price_model():
 df = load_aggregated()
 raw_df = load_raw()
 price_model = load_price_model()
+st.write("Model expects these features:")
+st.write(list(price_model.feature_names_in_))
+st.stop()
 
 
 # ==================== RECOMMENDATION HELPER ====================
