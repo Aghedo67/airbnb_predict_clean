@@ -5,6 +5,21 @@
 #import matplotlib.pyplot as plt
 #import matplotlib.ticker as mticker
 
+import os
+import streamlit as st
+import joblib
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.ticker as mticker
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+st.set_page_config(
+    page_title="Dublin Airbnb Intelligence Suite",
+    layout="wide",
+    page_icon="🍀"
+)
 # -------------------- PAGE CONFIG --------------------
 st.set_page_config(
     page_title="Dublin Airbnb Intelligence Suite",
@@ -83,16 +98,6 @@ st.markdown("""
 
 
 # ==================== DATA & MODEL LOADING ====================
-
-import os
-import streamlit as st
-import joblib
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib.ticker as mticker
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 @st.cache_data
 def load_aggregated():
