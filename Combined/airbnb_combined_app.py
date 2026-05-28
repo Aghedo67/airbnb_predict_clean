@@ -86,18 +86,18 @@ st.markdown("""
 
 @st.cache_data
 def load_aggregated():
-    return pd.read_csv("dublin_aggregated_df(1).csv")
+    return pd.read_csv("dublin_aggregated_df (1).csv")
 
 @st.cache_data
 def load_raw():
-    df = pd.read_csv('dublin_merged_df(1).csv.gz', compression='gzip')
+    df = pd.read_csv('dublin_merged_df (1).csv.gz', compression='gzip')
     df['date'] = pd.to_datetime(df['date'], errors='coerce')
     df['month'] = df['date'].dt.month
     return df
 
 @st.cache_resource
 def load_price_model():
-    return joblib.load('xgb_log_model(1).pkl')
+    return joblib.load('xgb_log_model (1).pkl')
 
 @st.cache_resource
 def load_recommendation_model():
