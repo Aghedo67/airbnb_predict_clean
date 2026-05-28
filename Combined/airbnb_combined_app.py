@@ -294,7 +294,7 @@ Errors on log-transformed prices may understate issues with extreme-priced listi
 
 
 # ==================== TAB 4: PRICE PREDICTOR ====================
-with tab5:
+with tab4:
     st.subheader("Predict Your Listing Price")
     st.markdown("All inputs correspond to the **top 20 XGBoost features** identified from model analysis.")
 
@@ -419,7 +419,7 @@ with tab5:
 
 
 # ==================== TAB 5: RECOMMENDATIONS ====================
-with tab6:
+with tab5:
     st.subheader("Personalised Stay Recommendations")
     st.markdown("Discover Dublin listings tailored to a guest's past review history.")
 
