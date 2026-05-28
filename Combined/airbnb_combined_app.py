@@ -1,9 +1,9 @@
-import streamlit as st
-import joblib
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib.ticker as mticker
+#import streamlit as st
+#import joblib
+#import numpy as np
+#import pandas as pd
+#import matplotlib.pyplot as plt
+#import matplotlib.ticker as mticker
 
 # -------------------- PAGE CONFIG --------------------
 st.set_page_config(
@@ -84,24 +84,34 @@ st.markdown("""
 
 # ==================== DATA & MODEL LOADING ====================
 
+import os
+import streamlit as st
+import joblib
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.ticker as mticker
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 @st.cache_data
 def load_aggregated():
-    return pd.read_csv("dublin_aggregated_df (1).csv")
+    return pd.read_csv(os.path.join(BASE_DIR, 'dublin_aggregated_df (1).csv'))
 
 @st.cache_data
 def load_raw():
-    df = pd.read_csv('dublin_merged_df (1).csv.gz', compression='gzip')
+    df = pd.read_csv(os.path.join(BASE_DIR, 'dublin_merged_df (1).csv.gz'), compression='gzip')
     df['date'] = pd.to_datetime(df['date'], errors='coerce')
     df['month'] = df['date'].dt.month
     return df
 
 @st.cache_resource
 def load_price_model():
-    return joblib.load('xgb_log_model (1).pkl')
+    return joblib.load(os.path.join(BASE_DIR, 'xgb_log_model (1).pkl'))
 
 @st.cache_resource
 def load_recommendation_model():
-    return joblib.load('Recommendation_system/baseline_model_joblib (1).pkl')
+    return joblib.load(os.path.join(BASE_DIR, 'Recommendation_system', 'baseline_model_joblib (1).pkl'))
 
 df = load_aggregated()
 raw_df = load_raw()
