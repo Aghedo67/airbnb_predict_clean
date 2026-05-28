@@ -101,7 +101,7 @@ def load_price_model():
 
 @st.cache_resource
 def load_recommendation_model():
-    return joblib.load('Recommendation_system/baseline_model_joblib.pkl')
+    return joblib.load('Recommendation_system/baseline_model_joblib (1).pkl')
 
 df = load_aggregated()
 raw_df = load_raw()
