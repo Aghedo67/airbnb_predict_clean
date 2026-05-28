@@ -157,11 +157,10 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 # ==================== TABS ====================
 
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "📊 Dashboard",
     "📈 Visual Insights",
     "🧠 Model Insights",
-    "📉 ANOVA Analysis",
     "💰 Price Predictor",
     "🔍 Recommendations"
 ])
@@ -232,15 +231,15 @@ with tab3:
 
     st.markdown("**Test-set metrics**")
     m1, m2, m3 = st.columns(3)
-    m1.metric("R² Score", "0.6925", help="Explains 69% of price variance.")
-    m2.metric("RMSE (log)", "0.3910")
-    m3.metric("MAE (log)", "0.2665")
+    m1.metric("R² Score", "0.78", help="Explains 78% of price variance.")
+    m2.metric("RMSE (log)", "0.311")
+    m3.metric("MAE (log)", "0.228")
 
     st.markdown("**Cross-validated metrics**")
     m4, m5, m6 = st.columns(3)
-    m4.metric("CV R²", "0.6918")
-    m5.metric("CV RMSE (log)", "0.3784")
-    m6.metric("CV MAE (log)", "0.2721")
+    m4.metric("CV R²", "0.7948")
+    m5.metric("CV RMSE (log)", "0.2993")
+    m6.metric("CV MAE (log)", "0.2193")
 
     st.markdown("---")
 
@@ -294,50 +293,7 @@ Errors on log-transformed prices may understate issues with extreme-priced listi
         """)
 
 
-# ==================== TAB 4: ANOVA ====================
-with tab4:
-    try:
-        import plotly.express as px
-
-        st.markdown("## ANOVA Feature Significance")
-
-        ca, cb, cc = st.columns(3)
-        ca.success("🏆 **Top drivers**\n\nAccommodates · Bedrooms · Property type · Location scores")
-        cb.warning("⚖️ **Moderate impact**\n\nRoom type · Instant booking · Season · Cleanliness")
-        cc.error("⚠️ **Low / insignificant**\n\nBathrooms · Number of reviews")
-
-        anova_data = pd.DataFrame({
-            "Feature": [
-                "Accommodates", "Bedrooms", "Property Type",
-                "Location Score", "Room Type", "Instant Bookable",
-                "Season", "Bathrooms"
-            ],
-            "F_value": [48323, 6501, 1261, 7849, 209, 562, 14, 0.5],
-            "p_value": [0.0, 0.0, 0.0, 0.0, 6.08e-136, 2.56e-124, 3.23e-9, 0.476]
-        })
-        anova_data["Significance"] = anova_data["p_value"].apply(
-            lambda x: "Significant (p < 0.05)" if x < 0.05 else "Not Significant"
-        )
-
-        fig_a = px.bar(
-            anova_data, x="F_value", y="Feature",
-            color="Significance", orientation="h",
-            hover_data={"F_value": True, "p_value": ':.2e', "Feature": False},
-            title="ANOVA Feature Significance",
-            color_discrete_map={
-                "Significant (p < 0.05)": "#FF385C",
-                "Not Significant": "#aaa"
-            }
-        )
-        fig_a.update_layout(yaxis=dict(autorange="reversed"), plot_bgcolor='rgba(0,0,0,0)')
-        st.plotly_chart(fig_a, use_container_width=True)
-        st.info("Hover over each bar to see exact F-values and p-values. Features with p < 0.05 are statistically significant drivers of price.")
-
-    except ImportError:
-        st.warning("Plotly not installed. Run `pip install plotly` to enable this chart.")
-
-
-# ==================== TAB 5: PRICE PREDICTOR ====================
+# ==================== TAB 4: PRICE PREDICTOR ====================
 with tab5:
     st.subheader("Predict Your Listing Price")
     st.markdown("All inputs correspond to the **top 20 XGBoost features** identified from model analysis.")
@@ -462,7 +418,7 @@ with tab5:
         )
 
 
-# ==================== TAB 6: RECOMMENDATIONS ====================
+# ==================== TAB 5: RECOMMENDATIONS ====================
 with tab6:
     st.subheader("Personalised Stay Recommendations")
     st.markdown("Discover Dublin listings tailored to a guest's past review history.")
