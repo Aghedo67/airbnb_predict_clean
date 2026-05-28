@@ -282,11 +282,8 @@ with tab3:
     with col_right:
         st.subheader("Model Limitations")
         st.info("""
-**Unexplained Variance (31%)**
+**Unexplained Variance (21%)**
 The model cannot capture intangibles like interior design, photography quality, or specific landmark proximity.
-
-**Mild overfitting**
-Train/test RMSE gap of ~0.11 suggests some memorisation of training noise.
 
 **Log-scale effect**
 Errors on log-transformed prices may understate issues with extreme-priced listings.
