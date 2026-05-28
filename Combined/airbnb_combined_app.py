@@ -48,6 +48,8 @@ st.markdown("""
 @st.cache_data
 def load_aggregated():
     return pd.read_csv(os.path.join(BASE_DIR, 'dublin_aggregated_df (1).csv'))
+st.write(df.columns.tolist())
+st.stop()
 
 @st.cache_data
 def load_raw():
